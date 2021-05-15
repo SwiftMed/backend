@@ -1,3 +1,5 @@
+// POWERHOUSE BEHIND BACKEND RIGHT HERE
+
 export function backend() {
     let users = [{ id: 1, username: 'demo', password: 'turnerhacks', firstName: 'Test User', lastName: 'Demo' }];
     let realFetch = window.fetch;
@@ -24,10 +26,8 @@ export function backend() {
                     return ok(users);
                 }
 
-                // pass through any requests not handled above
                 realFetch(url, opts).then(response => resolve(response));
 
-                // private helper functions
 
                 function ok(body) {
                     resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(body)) })
