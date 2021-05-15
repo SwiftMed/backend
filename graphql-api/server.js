@@ -76,30 +76,30 @@ const RootQueryType = new GraphQLObjectType({
   description: 'Root Query',
   fields: () => ({
     swiftmedId: {
-      type: BookType,
-      description: 'A Single Book',
+      type: tokenId,
+      description: 'Token',
       args: {
         id: { type: GraphQLInt }
       },
-      resolve: (parent, args) => books.find(book => book.id === args.id)
+      resolve: (parent, args) => token.find(hospitallocation => tokenId.id === args.id)
     },
-    books: {
-      type: new GraphQLList(BookType),
-      description: 'List of All Books',
-      resolve: () => books
+    hospital: {
+      type: new GraphQLList(HospitalId),
+      description: 'Hospital List',
+      resolve: () => hospital
     },
-    authors: {
-      type: new GraphQLList(AuthorType),
-      description: 'List of All Authors',
+    token: {
+      type: new GraphQLList(tokenId),
+      description: 'Token List',
       resolve: () => authors
     },
-    author: {
-      type: AuthorType,
-      description: 'A Single Author',
+    patient: {
+      type: Patients,
+      description: 'Patient List',
       args: {
         id: { type: GraphQLInt }
       },
-      resolve: (parent, args) => authors.find(author => author.id === args.id)
+      resolve: (parent, args) => patient.find(patientId => tokenId === args.id)
     }
   })
 })
@@ -108,29 +108,29 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   description: 'Root Mutation',
   fields: () => ({
-    addBook: {
-      type: BookType,
+    addPatient: {
+      type: patientId,
       description: 'Add a patient',
       args: {
         name: { type: GraphQLNonNull(GraphQLString) },
         authorId: { type: GraphQLNonNull(GraphQLInt) }
       },
       resolve: (parent, args) => {
-        const book = { id: books.length + 1, name: args.name, authorId: args.authorId }
-        books.push(book)
-        return book
+        const patient = { id: tokenId + 1, name: args.name, patientId: args.authorId }
+        patient.push(patient)
+        return patient
       }
     },
-    addAuthor: {
-      type: AuthorType,
-      description: 'Add an author',
+    addHospital: {
+      type: hospitalId,
+      description: 'Add a Hospital',
       args: {
         name: { type: GraphQLNonNull(GraphQLString) }
       },
       resolve: (parent, args) => {
-        const author = { id: authors.length + 1, name: args.name }
-        authors.push(author)
-        return author
+        const hospital = { id: hospital.distance + 1, name: args.name }
+        hospital.push(hospital)
+        return hospital
       }
     }
   })
